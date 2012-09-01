@@ -3,34 +3,41 @@
 <head>
     <title>Angular Playground</title>
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/toastr/toastr.css">
+    <link rel="stylesheet" href="lib/toastr/toastr-responsive.css">
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body ng-app="app">
+<body ng-app="app"  ng-controller="FiddleCtrl">
 <div class="navbar navbar-inverse navbar-static-top">
     <div class="navbar-inner">
-        <a class="brand" href="#">Angular Playground</a>
-        <!--<ul class="nav">-->
-            <!--<li class="active"><a href="#" data-toggle="tab">Home</a></li>-->
+        <a class="brand" href="#">Angular
+            Playground</a>
+        <ul class="nav">
+            <li class="active"><a href="#" data-toggle="tab">Home</a></li>
+            <!--<li><a href="#"  data-toggle="tab">Plunks</a></li>-->
+            <!--<li><a href="#"  data-toggle="tab">Articles</a></li>-->
             <!--<li><a href="#"  data-toggle="tab">About</a></li>-->
-            <!--<input type="text" ng-model="user" class="input-medium search-query"-->
-                   <!--placeholder="Search for a fiddle user " />-->
-        <!--</ul>-->
+            <form class="navbar-form pull-left">
+                <input type="text" class="input-short" ng-model="userName" placeholder="Enter a jsFiddle user name">
+                <button type="submit" class="btn" ng-click="getFiddles(userName)">Get Fiddles</button>
+            </form>
+        </ul>
 
     </div>
 </div>
-<div class="container-fluid"  ng-controller="FiddleCtrl">
+<div class="container-fluid" >
     <div class="row-fluid">
         <div class="span2 well">
             <!--Sidebar content-->
             <form class="form-search">
-                <input type="text" ng-model="search" class="input-medium search-query"
-                       placeholder="Search for a fiddle" />
+                <input type="text" ng-model="search" class="input-small search-query"
+                       placeholder="Filter..." />
             </form>
 
             <ul class="nav nav-pills nav-stacked">
                 <li class="active" ng-click="showIntro()"><a data-toggle="pill">Intro</a></li>
                 <li ng-repeat="f in fiddles.list | filter:search | orderBy:title">
-                    <a ng-click="loadFiddle(f)" data-toggle="pill">{{f.title}}</a>
+                    <a ng-click="loadFiddle(f)" data-toggle="pill" title="{{f.description}}">{{f.title}}</a>
                 </li>
             </ul>
         </div>
@@ -38,18 +45,23 @@
         <div class="span10">
             <div id="intro">
                 <h1>Angular Playground</h1>
-                Welcome to the Angular Playground. Click on the links at the left to view some Fiddles and
-                Plunks.</div>
+                <p>
+                Welcome to the Angular Playground. Enter a jsFiddle user name above and Get some fiddles.
+                </p>
+
+
+            </div>
 
             <iframe id="fiddle" class="span10 iframe" frameborder="none"></iframe>
 
     </div>
 </div>
+    </div>
 <script src="js/lib/jquery/jquery-1.7.2.js" type="text/javascript" ></script>
 <script src="js/lib/angular/angular.js" type="text/javascript"></script>
 <script src="js/lib/angular/angular-resource.js" type="text/javascript"></script>
 <script src="js/lib/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+<script src="lib/toastr/toastr.js"></script>
 <script src="js/app.js" type="text/javascript"></script>
-<!---->
 </body>
 </html>
